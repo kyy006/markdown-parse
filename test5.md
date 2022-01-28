@@ -1,2 +1,2 @@
-<http://www.markdown.org>
+[](http://www.markdown.org)
 ![alt text](image.jpg)

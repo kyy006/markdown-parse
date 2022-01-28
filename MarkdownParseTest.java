@@ -19,7 +19,7 @@ public class MarkdownParseTest {
         //List.of("https://something.com","some-page.html")
 
         try {
-            Path filePath=Path.of("test-file.md");
+            Path filePath=Path.of("empty.md");
             String content=Files.readString(filePath);
             assertEquals("",content);
             System.out.println(content);

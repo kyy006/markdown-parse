@@ -34,7 +34,6 @@ public class MarkdownParseTest {
         try {
             Path filePath = Path.of("test-file3.md");
             String contents = Files.readString(filePath);
-            assertEquals("hi", contents);
          
         } catch(Exception e) {
              System.out.println(e.toString());

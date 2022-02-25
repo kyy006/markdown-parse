@@ -1,43 +1,38 @@
 import static org.junit.Assert.*;
+import org.junit.*;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import javax.swing.text.AttributeSet.ParagraphAttribute;
-
-import org.junit.*;
+import java.util.List;
 
 public class MarkdownParseTest {
     @Test
-    public void addition() {
-        assertEquals(2, 1 + 1);
-    }
-    @Test
-    public void checkContent(){
-        //boolean contain=false;
-
-        //List.of("https://something.com","some-page.html")
-
-        try {
-            Path filePath=Path.of("empty.md");
-            String content=Files.readString(filePath);
-            assertEquals("",content);
-            System.out.println(content);
-        } catch (Exception e) {
-            System.out.println(e.toString());
-            //contain=true;
-        }
-    }
-    @Test
-    public void jTestPlat() {
-     
-        try {
-            Path filePath = Path.of("test-file3.md");
-            String contents = Files.readString(filePath);
-         
-        } catch(Exception e) {
-             System.out.println(e.toString());
-        }
+    public void testFile1() throws IOException {
+        String contents= Files.readString(Path.of("./test-file.md"));
+        List<String> expect = List.of("https://something.com", "some-page.html");
+        assertEquals(MarkdownParse.getLinks(contents), expect);
     }
     
+    @Test
+    public void testFile2() throws IOException {
+        String contents= Files.readString(Path.of("./test-file2.md"));
+        List<String> expect = List.of("https://something.com", "some-page.html");
+        assertEquals(MarkdownParse.getLinks(contents), expect);
+    }
+
+    @Test
+    public void testMissingCloseParen() {
+        String contents= "[link title](a.com";
+        List<String> expect = List.of();
+        assertEquals(MarkdownParse.getLinks(contents), expect);
+    }
+
+    @Test
+    public void testSpaceAroundLink() {
+        String contents= "[link title](   a.com   )";
+        List<String> expect = List.of("a.com");
+        assertEquals(expect, MarkdownParse.getLinks(contents));
+    }
+
 }

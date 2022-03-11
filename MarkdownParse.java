@@ -19,7 +19,7 @@ public class MarkdownParse {
             int openParen = markdown.indexOf("(", nextCloseBracket);
             int closeParen = markdown.indexOf(")", openParen);
             toReturn.add(markdown.substring(openParen + 1, closeParen));
-            System.out.println(currentIndex);
+            
             currentIndex = closeParen + 1;
             if (nextOpenBracket == -1 || nextCloseBracket == -1 ||
             nextOpenCarrot == -1 || nextCloseCarrot == -1 ||
@@ -33,9 +33,9 @@ public class MarkdownParse {
             
         }
         
-        System.out.println(currentIndex);
+        
         int test = markdown.indexOf("]");
-        System.out.println(test);
+        
         return toReturn;
     }
     public static void main(String[] args) throws IOException {
